@@ -68,7 +68,7 @@
     <link rel="next" href="prereq-ubuntu.html" />
     
     
-    <link rel="prev" href="prereq-centos7.html" />
+    <link rel="prev" href="prereq-centos8.html" />
     
 
     </head>
@@ -183,7 +183,20 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3.1.2" data-path="prereq-macos.html">
+        <li class="chapter " data-level="1.3.1.2" data-path="prereq-centos8.html">
+            
+                <a href="prereq-centos8.html">
+            
+                    
+                    Prerequisites for CentOS 8
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.1.3" data-path="prereq-macos.html">
             
                 <a href="prereq-macos.html">
             
@@ -196,7 +209,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.1.3" data-path="prereq-ubuntu.html">
+        <li class="chapter " data-level="1.3.1.4" data-path="prereq-ubuntu.html">
             
                 <a href="prereq-ubuntu.html">
             
@@ -209,7 +222,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.1.4" data-path="prereq-fedora.html">
+        <li class="chapter " data-level="1.3.1.5" data-path="prereq-fedora.html">
             
                 <a href="prereq-fedora.html">
             
@@ -376,7 +389,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.7" data-path="../analysis/trouble.html">
+        <li class="chapter " data-level="1.4.7" data-path="../analysis/oadb.html">
+            
+                <a href="../analysis/oadb.html">
+            
+                    
+                    Offline analysis database
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../analysis/trouble.html">
             
                 <a href="../analysis/trouble.html">
             
@@ -389,7 +415,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.8" data-path="../analysis/streamer.html">
+        <li class="chapter " data-level="1.4.9" data-path="../analysis/streamer.html">
             
                 <a href="../analysis/streamer.html">
             
@@ -402,7 +428,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.9" data-path="../analysis/destructor.html">
+        <li class="chapter " data-level="1.4.10" data-path="../analysis/destructor.html">
             
                 <a href="../analysis/destructor.html">
             
@@ -766,10 +792,11 @@
                                 <h1 id="alibuild-prerequisites-for-macos">aliBuild prerequisites for macOS</h1>
 <p>ALICE software on macOS is supported on a best effort basis. Even though we systematically check macOS builds there is no guarantee that software builds or runs correctly. Support requests might have low priority. We were able to successfully build on:</p>
 <ul>
-<li>Mojave (10.14)</li>
 <li>Catalina (10.15)</li>
+<li>Big Sur (11.0)</li>
 </ul>
-<p>With very short update cycles of macOS, refrain from updating until we list the latest version of macOS as verified for your own good.</p>
+<p>With very short update cycles of macOS, refrain from updating until we list the latest version of macOS as verified.</p>
+<p>In November 2020, Apple started a transition to theier own ARM based processor archtecture called &quot;Apple Silicon&quot; on the Mac. These differ significantly from the current Macs based on Intel X86 processors. In the forseeable future, these ARM based Macs will not be able to run ALICE code as software packages we depend on are not yet available for this platform. However with a big Mac community at ALICE we expect support to come once this is possible.</p>
 <h2 id="get-xcode">Get Xcode</h2>
 <p>Xcode bundles the necessary tools to build software in the apple ecosystem including compilers, build systems and version control</p>
 <ul>
@@ -778,30 +805,15 @@
 <li>Open a terminal (<code>Applicaions&gt;Utilities&gt;Terminal</code>) and install the command line tools using:<pre><code class="lang-bash">sudo xcode-select --install
 </code></pre>
 </li>
-<li><p>approve the license conditions by</p>
-<pre><code class="lang-bash">sudo xcodebuild -license
+<li>approve the license conditions by<pre><code class="lang-bash">sudo xcodebuild -license
 </code></pre>
-<h2 id="disable-system-integrity-protection-sip">Disable System Integrity Protection (SIP)</h2>
-<p>System Integrity Protection was introduced by Apple to Mac OSX since El Capitan and is meant to harden the system against malicious software. More details are available in <a href="https://support.apple.com/en-us/HT204899" target="_blank">Apple&apos;s knowledge base</a>.
-Unfortunately, some of the measures taken by SIP (in particular not propagating <code>LD_LIBRARY_PATH</code>) will cause ROOT to not find dynamic libraries. We therefore have to switch off SIP.</p>
 </li>
-<li><p>Reboot your Mac in <em>Recovery Mode</em>. by holding <code>Command-R</code> at startup until the Apple logo appears.</p>
-</li>
-<li>Open a Terminal: (<code>Utilities&gt;Terminal</code>).</li>
-<li>Disable SIP by executing
-<code>csrutil disable</code> </li>
-<li>Restart your machine.</li>
-<li>After the reboot, open a terminal (<code>Applicaions&gt;Utilities&gt;Terminal</code>) and check if <pre><code class="lang-bash">csrutil status
-</code></pre>
-returns <code>System Integrity Protection status: disabled.</code></li>
 </ul>
-<p>The process can be reverted by following the above steps executing<br><code>csrutil enable</code></p>
-<p>The process is also documented in <a href="https://developer.apple.com/library/archive/documentation/Security/Conceptual/System_Integrity_Protection_Guide/ConfiguringSystemIntegrityProtection/ConfiguringSystemIntegrityProtection.html" target="_blank">Apple&apos;s developer documentation</a></p>
 <h2 id="get-homebrew">Get Homebrew</h2>
 <p><a href="https://brew.sh" target="_blank">Homebrew</a> is a command-line package manager for macOS used to install software packages similar to <code>yum</code> on CentOS or <code>apt</code> on Ubuntu. There are several different package managers for macOS, but Homebrew is by far the most poppular , and the only one we support.</p>
 <ul>
 <li>Install Homebrew using the <a href="https://brew.sh/" target="_blank">instructions on their webpage</a>.</li>
-<li>Once installed detect any problems regarding Homebrew and your system using  <pre><code class="lang-bash">brew doctor
+<li>Once installed detect any problems regarding Homebrew and your system using<pre><code class="lang-bash">brew doctor
 </code></pre>
 </li>
 </ul>
@@ -813,27 +825,21 @@ returns <code>System Integrity Protection status: disabled.</code></li>
 Various users have reported that this might terminate with an error. The solution oddly enough seems to be to execute the above command multiple times until brew does not complain anymore.</li>
 <li><p>If you have just upgraded your Xcode or macOS, you should run <code>brew reinstall</code> instead, in order to force the reinstallation of already installed packages. You also might want to run <code>brew cleanup</code> at the end to free up some space.</p>
 </li>
-<li><p>Edit or create <code>~/.bash_profile</code> (Mojave) or <code>~/.zprofile</code> (Catalina) and add</p>
+<li><p>Edit or create <code>~/.zprofile</code> and add</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;/usr/local/opt/gettext/bin:/usr/local/bin:<span class="hljs-variable">$PATH</span>&quot;</span>
 </code></pre>
 </li>
-<li>Close Terminal and reopen it to apply changes. </li>
+<li>Close Terminal and reopen it to apply changes.</li>
 </ul>
 <h2 id="python">Python</h2>
 <p>In case you are using <a href="https://www.anaconda.com/" target="_blank">Python from Anaconda</a> or Python from Homebrew
 then you have <code>pip</code> already. Check it by typing:</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">type</span> pip3
 </code></pre>
-<p>If not present install with </p>
-<pre><code class="lang-bash">sudo easy_install3.7 pip
+<p>If not present install with</p>
+<pre><code class="lang-bash">sudo easy_install3.9 pip
 sudo pip3 install --upgrade pip
 </code></pre>
-<h2 id="optional-python-modules">(Optional) Python modules</h2>
-<p>Optinally you can install the required python modules. If we cannot find them, our build system will do it for you.</p>
-<p>With the <strong>system python</strong>:</p>
-<pre><code class="lang-bash">sudo pip3 install --upgrade --force-reinstall matplotlib numpy certifi ipython==5.1.0 ipywidgets ipykernel notebook metakernel pyyaml
-</code></pre>
-<p>For <strong>Homebrew python</strong>, leave out the <code>sudo</code>.</p>
 <h2 id="optinal-exclude-your-work-directory-from-spotlight">(Optinal) Exclude your work directory from Spotlight</h2>
 <p>The mac search engine (Spotlight) will be indexing the build directory which can have severe effects on your system performance. To avoid that, you can exclude your working directory (we are assuming <code>~/alice</code> - create if not yet existing).
 Go to <code>(Apple) menu&gt;System preferences&gt;Spotlight</code>. In the <code>Privacy</code> tab, hit the <code>+</code> button. Now select the <code>~/alice</code> directory and confirm.</p>
@@ -866,7 +872,7 @@ software</a></p>
 
             
                 
-                <a href="prereq-centos7.html" class="navigation navigation-prev " aria-label="Previous page: Prerequisites for CentOS 7">
+                <a href="prereq-centos8.html" class="navigation navigation-prev " aria-label="Previous page: Prerequisites for CentOS 8">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -882,7 +888,7 @@ software</a></p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Prerequisites for macOS","level":"1.3.1.2","depth":3,"next":{"title":"Prerequisites for Ubuntu","level":"1.3.1.3","depth":3,"path":"building/prereq-ubuntu.md","ref":"building/prereq-ubuntu.md","articles":[]},"previous":{"title":"Prerequisites for CentOS 7","level":"1.3.1.1","depth":3,"path":"building/prereq-centos7.md","ref":"building/prereq-centos7.md","articles":[]},"dir":"ltr"},"config":{"plugins":["katex","panels@git+https://github.com/lhcb/gitbook-plugin-panels.git#117012fdc18c96831cb88196980c0ea73b0c87b8","collapsible-menu","block-align","page-toc"],"styles":{"website":"css/website.css"},"pluginsConfig":{"collapsible-menu":{},"block-align":{},"search":{},"page-toc":{"position":"before-first","selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4","showByDefault":true},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"panels":{},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"ALICE Analysis Tutorial","gitbook":"*","description":"Introduction to the common analysis techniques and tools of ALICE"},"file":{"path":"building/prereq-macos.md","mtime":"2020-08-31T16:27:58.064Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-31T16:28:51.327Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Prerequisites for macOS","level":"1.3.1.3","depth":3,"next":{"title":"Prerequisites for Ubuntu","level":"1.3.1.4","depth":3,"path":"building/prereq-ubuntu.md","ref":"building/prereq-ubuntu.md","articles":[]},"previous":{"title":"Prerequisites for CentOS 8","level":"1.3.1.2","depth":3,"path":"building/prereq-centos8.md","ref":"building/prereq-centos8.md","articles":[]},"dir":"ltr"},"config":{"plugins":["katex","panels@git+https://github.com/lhcb/gitbook-plugin-panels.git#117012fdc18c96831cb88196980c0ea73b0c87b8","collapsible-menu","block-align","page-toc"],"styles":{"website":"css/website.css"},"pluginsConfig":{"collapsible-menu":{},"block-align":{},"search":{},"page-toc":{"position":"before-first","selector":".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4","showByDefault":true},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"panels":{},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"ALICE Analysis Tutorial","gitbook":"*","description":"Introduction to the common analysis techniques and tools of ALICE"},"file":{"path":"building/prereq-macos.md","mtime":"2021-04-09T09:37:52.176Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-09T09:38:37.070Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
